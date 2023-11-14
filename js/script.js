@@ -45,22 +45,28 @@ const app = createApp({
     methods: {
         // Per impostare l'indice attivo
         setActiveIndex(index) {
+            console.log("indice attivo su", index);
+
             this.activeIndex = index;
         },
         // Indice circolare per la slide successiva
         nextSlide() {
+            console.log("next slide");
             this.activeIndex = (this.activeIndex + 1) % this.slides.length;
         },
         // Indice circolare per la slide precedente
         prevSlide() {
+            console.log("previous slide");
             this.activeIndex = (this.activeIndex - 1 + this.slides.length) % this.slides.length;
         },
         // Metti in pausa l'autoplay
         pauseAutoplay() {
+            console.log("autoplay in pausa");
             clearInterval(this.autoplayInterval);
         },
         // Riprendi l'autoplay
         resumeAutoplay() {
+            console.log("autoplay ripresa");
             this.autoplayInterval = setInterval(() => {
                 this.nextSlide();
             }, 3000);
@@ -68,11 +74,13 @@ const app = createApp({
     },
     mounted() {
         // Inizia l'autoplay alla creazione dell'app
+        console.log("componente caricato");
         this.autoplayInterval = setInterval(() => {
             this.nextSlide();
         }, 3000);
     },
     beforeUnmount() {
+        console.log("componente disattivato");
         // Pulisci l'intervallo
         clearInterval(this.autoplayInterval);
     }
@@ -80,3 +88,5 @@ const app = createApp({
 
 // Monta l'applicazione all'elemento con id "app"
 app.mount(`#app`);
+
+// The beforeUnmount lifecycle hook in Vue.js is called right before a Vue component is unmounted from the DOM. This hook is useful for performing cleanup tasks or clearing resources before the component is removed.
