@@ -1,3 +1,11 @@
+/* circular index array: 
+const imageData = [ 'image1.png', 'img2.png', 'img3.png' ];
+let currentImage = 0;
+
+const nextImage = () => currentImage = (currentImage + 1) % imageData.length;
+
+const prevImage = () => currentImage = (currentImage - 1 + imageData.length) % imageData.length;*/
+
 
 const {createApp} = Vue;
 
@@ -35,10 +43,20 @@ const app = createApp({
 
         };
     },
+    //funzioni:
     methods: {
+        //per settare l'index attivo
         setActiveIdenx(index) {
             this.activeIndex = index;
-        }
+        },
+        //circular index per next slide 
+        nextSlide() {
+            this.activeIndex = (this.activeIndex + 1) % this.slides.length;
+        },
+        prevSlide(){
+            //circular index per prev slide
+            this.activeIndex = (this.activeIndex - 1 + this.slides.length) % this.slides.length;
+        },
     }
 });
 
