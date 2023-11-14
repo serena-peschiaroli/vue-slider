@@ -46,7 +46,7 @@ const app = createApp({
     //funzioni:
     methods: {
         //per settare l'index attivo
-        setActiveIdenx(index) {
+        setActiveIndex(index) {
             this.activeIndex = index;
         },
         //circular index per next slide 
@@ -57,6 +57,22 @@ const app = createApp({
             //circular index per prev slide
             this.activeIndex = (this.activeIndex - 1 + this.slides.length) % this.slides.length;
         },
+        pauseAutoplay() {
+            clearInterval(this.autoplayInterval);
+        },
+        resumeAutoplay () {
+            this.autoplayInterval = setInterval(() => {
+                this.nextSlide();
+            }, 3000);
+        }
+    },
+    mounted () {
+        this.autoplayInterval = setIterval(() => {
+            this.nextSlide();
+        }, 3000);
+    },
+    beforeUnmount(){
+        clearInterval(this.autoplayInterval);
     }
 });
 
